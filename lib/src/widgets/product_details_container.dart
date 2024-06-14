@@ -4,6 +4,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:mca_official_flutter_sdk/src/constants/custom_colors.dart';
 import 'package:mca_official_flutter_sdk/src/globals.dart';
+import 'package:mca_official_flutter_sdk/src/utils/color_utils.dart';
 import 'package:mca_official_flutter_sdk/src/utils/custom_text_styles.dart';
 import 'package:mca_official_flutter_sdk/src/utils/icon_utils.dart';
 import 'package:mca_official_flutter_sdk/src/utils/spacers.dart';
@@ -14,6 +15,7 @@ import 'package:mca_official_flutter_sdk/src/widgets/icon_container.dart';
 import 'package:mca_official_flutter_sdk/src/widgets/shimmer_loader.dart';
 
 class ProductDetailsContainer extends StatelessWidget {
+  final bool isWhiteBg;
   // final String productName, periodOfCover, formattedPrice, price;
   // final ProviderLiteModel? provider;
   // final bool isDynamicPrice;
@@ -27,14 +29,18 @@ class ProductDetailsContainer extends StatelessWidget {
     // required this.provider,
     // required this.isDynamicPrice,
     // required this.productCategory,
+    this.isWhiteBg = false,
   });
 
   @override
   Widget build(BuildContext context) {
     return Consumer(builder: (context, ref, child) {
+      var provider = ref.watch(selectedProductDetailsProvider)?.provider;
       return Container(
         decoration: BoxDecoration(
-            color: CustomColors.backBorderColor,
+            color: isWhiteBg
+                ? CustomColors.whiteColor
+                : CustomColors.backBorderColor,
             borderRadius: BorderRadius.circular(2.r),
             border: const Border(
                 bottom: BorderSide(
@@ -51,99 +57,174 @@ class ProductDetailsContainer extends StatelessWidget {
               Expanded(
                 child: Row(
                   children: [
-                    IconContainer(
-                      icon: IconUtils.getIcon(ref
-                              .watch(selectedProductCategoryProvider)
-                              // productCategory
-                              ?.name ??
-                          ""),
-                    ),
-                    horizontalSpacer(10.w),
+                    // IconContainer(
+                    //   icon: IconUtils.getIcon(ref
+                    //           .watch(selectedProductCategoryProvider)
+                    //           // productCategory
+                    //           ?.name ??
+                    //       ""),
+                    // ),
+                    // horizontalSpacer(10.w),
                     Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      child: Row(
                         children: [
-                          semiBoldText(
-                            ref.watch(selectedProductDetailsProvider)?.name ??
-                                "",
+                          Container(
+                            height: 33,
+                            width: 33,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(
+                                color: ColorUtils.getColorFromHex(
+                                        provider?.settings?.brandColorPrimary)
+                                    .withOpacity(0.5),
+                                width: 4.13,
+                              ),
 
-                            // .
-                            // productName,
-                            fontSize: 14.sp,
+                              // color: Colors.red,
+                            ),
+                            child: Center(
+                                child: provider == null ||
+                                        StringUtils.isNullOrEmpty(
+                                            provider.settings?.logo)
+                                    ? semiBoldText(
+                                        StringUtils.getFirstCharCapitalized(
+                                            provider?.companyName),
+                                        fontSize: 13.sp,
+                                        color: CustomColors.blackColor,
+                                      )
+                                    : customImagenetwork(
+                                        imageUrl: provider.settings!.logo!,
+                                        loaderWidget: regularText(
+                                            provider.companyName ?? "",
+                                            fontSize: 13.sp,
+                                            color: CustomColors.greyTextColor),
+                                        // fit: BoxFit.cover,
+                                        height: 15.h,
+                                      )
+
+                                // kk semiBoldText(
+                                //   StringUtils.getFirstCharCapitalized(provider?.companyName),
+                                //   fontSize: 13.sp,
+                                //   color: CustomColors.blackColor,
+                                // ),
+                                ),
                           ),
-                          verticalSpacer(3.h),
-                          Row(
-                            children: [
-                              regularText("by; ",
-                                  fontSize: 13.sp,
-                                  color: CustomColors.greyTextColor),
-                              horizontalSpacer(3.w),
-                              ref
+                          horizontalSpacer(10.w),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                semiBoldText(
+                                  ref
                                           .watch(selectedProductDetailsProvider)
-                                          ?.provider ==
-                                      null
-                                  ? const SizedBox.shrink()
-                                  :
-
-                                  // ref
-                                  //             .watch(
-                                  //                 selectedProductDetailsProvider)
-                                  //             ?.provider
-                                  //             ?.settings
-                                  //             ?.logo ==
-                                  //         null
-
-                                  StringUtils.isNullOrEmpty(ref
-                                          .watch(selectedProductDetailsProvider)
-                                          ?.provider
-                                          ?.settings
-                                          ?.logo)
-                                      ? regularText(
-                                          ref
-                                                  .watch(
-                                                      selectedProductDetailsProvider)
-                                                  ?.provider
-                                                  ?.companyName ??
-                                              "",
-                                          fontSize: 13.sp,
-                                          color: CustomColors.greyTextColor)
-                                      : customImagenetwork(
-                                          imageUrl: ref
-                                              .watch(
-                                                  selectedProductDetailsProvider)!
-                                              .provider!
-                                              .settings!
-                                              .logo!,
-                                          fit: BoxFit.cover,
-                                          loaderWidget: ShimmerLoader(
-                                            height: 15.h,
-                                            width: 50,
-                                          ),
-                                          height: 15.h,
-                                        )
-
-                              //  Image.network(
-                              //     height: 15.h,
-                              //     ref
-                              //         .watch(
-                              //             selectedProductDetailsProvider)!
-                              //         .provider!
-                              //         .settings!
-                              //         .logo!,
-                              //     fit: BoxFit.cover,
-                              //     // package: 'mca_official_flutter_sdk',
-                              //   ),
-                              // Image.asset(
-                              //   height: 15.h,
-                              //   mockProviderProductLists[1].imageUrl,
-                              //   fit: BoxFit.cover,
-                              //   package: 'mca_official_flutter_sdk',
-                              // ),
-                            ],
-                          ),
+                                          ?.name ??
+                                      "",
+                                  fontSize: 14.sp,
+                                ),
+                                Row(
+                                  children: [
+                                    provider == null
+                                        ? const SizedBox.shrink()
+                                        : w500Text(provider.companyName ?? "",
+                                            fontSize: 12.sp,
+                                            color: CustomColors.greyTextColor)
+                                  ],
+                                ),
+                              ],
+                            ),
+                          )
                         ],
                       ),
-                    )
+                    ),
+
+                    // .
+                    // productName,
+
+                    // Expanded(
+                    //   child: Column(
+                    //     crossAxisAlignment: CrossAxisAlignment.start,
+                    //     children: [
+                    //       semiBoldText(
+                    //         ref.watch(selectedProductDetailsProvider)?.name ??
+                    //             "",
+
+                    //         // .
+                    //         // productName,
+                    //         fontSize: 14.sp,
+                    //       ),
+                    //       verticalSpacer(3.h),
+                    //       Row(
+                    //         children: [
+                    //           regularText("by; ",
+                    //               fontSize: 13.sp,
+                    //               color: CustomColors.greyTextColor),
+                    //           horizontalSpacer(3.w),
+                    //           ref
+                    //                       .watch(selectedProductDetailsProvider)
+                    //                       ?.provider ==
+                    //                   null
+                    //               ? const SizedBox.shrink()
+                    //               :
+
+                    //               // ref
+                    //               //             .watch(
+                    //               //                 selectedProductDetailsProvider)
+                    //               //             ?.provider
+                    //               //             ?.settings
+                    //               //             ?.logo ==
+                    //               //         null
+
+                    //               StringUtils.isNullOrEmpty(ref
+                    //                       .watch(selectedProductDetailsProvider)
+                    //                       ?.provider
+                    //                       ?.settings
+                    //                       ?.logo)
+                    //                   ? regularText(
+                    //                       ref
+                    //                               .watch(
+                    //                                   selectedProductDetailsProvider)
+                    //                               ?.provider
+                    //                               ?.companyName ??
+                    //                           "",
+                    //                       fontSize: 13.sp,
+                    //                       color: CustomColors.greyTextColor)
+                    //                   : customImagenetwork(
+                    //                       imageUrl: ref
+                    //                           .watch(
+                    //                               selectedProductDetailsProvider)!
+                    //                           .provider!
+                    //                           .settings!
+                    //                           .logo!,
+                    //                       fit: BoxFit.cover,
+                    //                       loaderWidget: ShimmerLoader(
+                    //                         height: 15.h,
+                    //                         width: 50,
+                    //                       ),
+                    //                       height: 15.h,
+                    //                     )
+
+                    //           //  Image.network(
+                    //           //     height: 15.h,
+                    //           //     ref
+                    //           //         .watch(
+                    //           //             selectedProductDetailsProvider)!
+                    //           //         .provider!
+                    //           //         .settings!
+                    //           //         .logo!,
+                    //           //     fit: BoxFit.cover,
+                    //           //     // package: 'mca_official_flutter_sdk',
+                    //           //   ),
+                    //           // Image.asset(
+                    //           //   height: 15.h,
+                    //           //   mockProviderProductLists[1].imageUrl,
+                    //           //   fit: BoxFit.cover,
+                    //           //   package: 'mca_official_flutter_sdk',
+                    //           // ),
+                    //         ],
+                    //       ),
+                    //     ],
+                    //   ),
+                    // )
                   ],
                 ),
               ),

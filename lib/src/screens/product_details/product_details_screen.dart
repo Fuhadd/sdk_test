@@ -103,6 +103,7 @@ class _ProductDetailsScreenState extends ConsumerState<ProductDetailsScreen> {
                   ),
                   verticalSpacer(30.h),
                   const ProductDetailsContainer(
+                      // isWhiteBg: true,
                       // productName: widget.productName,
                       // periodOfCover: widget.periodOfCover,
                       // formattedPrice: widget.formattedPrice,
@@ -229,58 +230,70 @@ class _ExpandableContainerState extends State<ExpandableContainer> {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 300),
         curve: Curves.easeInOut,
-        padding: EdgeInsets.only(left: 16.w, right: 16.w, top: 15),
+        padding: const EdgeInsets.only(top: 15),
         decoration: BoxDecoration(
           color: CustomColors.backBorderColor,
           borderRadius: BorderRadius.circular(8.r),
         ),
         // width: 300,
-        height: _isExpanded ? 1.sh * 0.25 : 50,
+        height: _isExpanded ? 1.sh * 0.3 : 55,
         child: ClipRect(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             // mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  semiBoldText(
-                    widget.title,
-                    fontSize: 14.sp,
-                    color: CustomColors.primaryBrandColor(),
-                  ),
-                  AnimatedRotation(
-                    turns: _isExpanded ? 0.5 : 0,
-                    duration: const Duration(milliseconds: 300),
-                    child: Center(
-                      child: SvgPicture.asset(ConstantString.chevronDown,
-                          package: 'mca_official_flutter_sdk'),
+              Padding(
+                padding: EdgeInsets.only(left: 16.w, right: 16.w, bottom: 15),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    semiBoldText(
+                      widget.title,
+                      fontSize: 14.sp,
+                      color: CustomColors.blackColor,
                     ),
-                  ),
-                ],
+                    AnimatedRotation(
+                      turns: _isExpanded ? 0.5 : 0,
+                      duration: const Duration(milliseconds: 300),
+                      child: Center(
+                        child: SvgPicture.asset(ConstantString.chevronDown,
+                            package: 'mca_official_flutter_sdk'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
+
               Expanded(
                 child: AnimatedCrossFade(
                   firstChild: Container(),
-                  secondChild: Padding(
-                    padding: const EdgeInsets.only(top: 15, bottom: 5),
-                    child:
+                  secondChild: Container(
+                    // color: CustomColors.lighterPrimaryBrandColor(),
+                    child: Padding(
+                      padding: EdgeInsets.only(
+                        top: 15,
+                        // bottom: 5,
+                        left: 16.w,
+                        right: 16.w,
+                      ),
+                      child:
 
-                        //     HtmlWidget(
-                        //   widget.subTtitle,
-                        // ),
+                          //     HtmlWidget(
+                          //   widget.subTtitle,
+                          // ),
 
-                        Scrollbar(
-                      // isAlwaysShown: true,
-                      child: SingleChildScrollView(
-                        child: HtmlWidget(
-                          widget.subTtitle,
+                          Scrollbar(
+                        // isAlwaysShown: true,
+                        child: SingleChildScrollView(
+                          child: HtmlWidget(
+                            widget.subTtitle,
+                          ),
+
+                          // Text(
+                          //   'Here is the expanded content. You can show more information here. Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.',
+                          //   style: TextStyle(color: Colors.black, fontSize: 16),
+                          // ),
                         ),
-
-                        // Text(
-                        //   'Here is the expanded content. You can show more information here. Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.t. You can show more information here.Here is the expanded content. You can show more information here.Here is the expanded content. You can show more information here.\nHere is the expanded content. You can show more information here.',
-                        //   style: TextStyle(color: Colors.black, fontSize: 16),
-                        // ),
                       ),
                     ),
                   ),

@@ -29,6 +29,7 @@ permission_handler_android=/Users/deniayewu/.pub-cache/hosted/pub.dev/permission
 permission_handler_apple=/Users/deniayewu/.pub-cache/hosted/pub.dev/permission_handler_apple-9.4.4/
 permission_handler_html=/Users/deniayewu/.pub-cache/hosted/pub.dev/permission_handler_html-0.1.1/
 permission_handler_windows=/Users/deniayewu/.pub-cache/hosted/pub.dev/permission_handler_windows-0.2.1/
+pusher_channels_flutter=/Users/deniayewu/.pub-cache/hosted/pub.dev/pusher_channels_flutter-2.2.1/
 shared_preferences=/Users/deniayewu/.pub-cache/hosted/pub.dev/shared_preferences-2.2.3/
 shared_preferences_android=/Users/deniayewu/.pub-cache/hosted/pub.dev/shared_preferences_android-2.2.2/
 shared_preferences_foundation=/Users/deniayewu/.pub-cache/hosted/pub.dev/shared_preferences_foundation-2.4.0/

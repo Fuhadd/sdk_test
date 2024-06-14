@@ -387,7 +387,7 @@ class _PlanExpandableContainerState extends State<PlanExpandableContainer> {
           borderRadius: BorderRadius.circular(8.r),
         ),
         // width: 300,
-        height: _isExpanded ? 1.sh * 0.25 : 50,
+        height: _isExpanded ? 1.sh * 0.3 : 50,
         child: ClipRect(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -399,7 +399,7 @@ class _PlanExpandableContainerState extends State<PlanExpandableContainer> {
                   semiBoldText(
                     widget.title,
                     fontSize: 14.sp,
-                    color: CustomColors.primaryBrandColor(),
+                    color: CustomColors.blackColor,
                   ),
                   AnimatedRotation(
                     turns: _isExpanded ? 0.5 : 0,

@@ -565,7 +565,7 @@ class _ListViewProviderListScreenState
                       //               ),
                       //               Row(
                       //                 children: [
-                      //                   regularText("by; ",
+                      //                   regularText("",
                       //                       fontSize: 13.sp,
                       //                       color: CustomColors.greyTextColor),
                       //                   horizontalSpacer(3.w),

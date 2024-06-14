@@ -17,6 +17,7 @@ import 'package:mca_official_flutter_sdk/src/widgets/custom_appbar.dart';
 import 'package:mca_official_flutter_sdk/src/widgets/custom_button.dart';
 import 'package:mca_official_flutter_sdk/src/widgets/payment_details_container.dart';
 import 'package:mca_official_flutter_sdk/src/widgets/powered_by_footer.dart';
+import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 // import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
 // import 'package:pusher_channels_flutter/pusher-js/core/channels/channel.dart';
 // import 'package:pusher_channels_flutter/pusher_channels_flutter.dart';
@@ -121,124 +122,124 @@ class _AccountDetailsScreenState extends ConsumerState<AccountDetailsScreen> {
   //   super.dispose();
   // }
 
-  ///BELOW
-  // PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
-  // PaymentMethod selectedOption = PaymentMethod.transfer;
+  //BELOW
+  PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
+  PaymentMethod selectedOption = PaymentMethod.transfer;
   // String displayText = "";
-  // // late PusherChannelsFlutter pusher;
-  // late String channelName;
-  // // Channel? channel;
+  // late PusherChannelsFlutter pusher;
+  late String channelName;
+  // Channel? channel;
 
-  // @override
-  // void initState() {
-  //   // TODO: implement initState
-  //   super.initState();
-  //   displayText = widget.paymentMethod == PaymentMethod.transfer
-  //       ? "Copy details"
-  //       : "Copy USSD code";
-  //   initPusher();
-  // }
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    displayText = widget.paymentMethod == PaymentMethod.transfer
+        ? "Copy details"
+        : "Copy USSD code";
+    initPusher();
+  }
 
-  // void onMemberAdded(String channelName, PusherMember member) {
-  //   print("onMemberAdded: $channelName user: $member");
-  // }
+  void onMemberAdded(String channelName, PusherMember member) {
+    print("onMemberAdded: $channelName user: $member");
+  }
 
-  // void onMemberRemoved(String channelName, PusherMember member) {
-  //   print("onMemberRemoved: $channelName user: $member");
-  // }
+  void onMemberRemoved(String channelName, PusherMember member) {
+    print("onMemberRemoved: $channelName user: $member");
+  }
 
-  // void onError(String message, int? code, dynamic e) {
-  //   print("onError: $message code: $code exception: $e");
-  // }
+  void onError(String message, int? code, dynamic e) {
+    print("onError: $message code: $code exception: $e");
+  }
 
-  // void onConnectionStateChange(dynamic currentState, dynamic previousState) {
-  //   print("Connection: $currentState");
-  // }
+  void onConnectionStateChange(dynamic currentState, dynamic previousState) {
+    print("Connection: $currentState");
+  }
 
-  // void onDecryptionFailure(String event, String reason) {
-  //   print("onDecryptionFailure: $event reason: $reason");
-  // }
+  void onDecryptionFailure(String event, String reason) {
+    print("onDecryptionFailure: $event reason: $reason");
+  }
 
-  // void onSubscriptionError(String message, dynamic e) {
-  //   print("onSubscriptionError: $message Exception: $e");
-  // }
+  void onSubscriptionError(String message, dynamic e) {
+    print("onSubscriptionError: $message Exception: $e");
+  }
 
-  // void onSubscriptionSucceeded(String channelName, dynamic data) {
-  //   print("onSubscriptionSucceeded: $channelName data: $data");
-  // }
+  void onSubscriptionSucceeded(String channelName, dynamic data) {
+    print("onSubscriptionSucceeded: $channelName data: $data");
+  }
 
-  // void onEvent(PusherEvent event) {
-  //   print("onEvent: $event");
-  // }
+  void onEvent(PusherEvent event) {
+    print("onEvent: $event");
+  }
 
-  // Future<void> initPusher() async {
-  //   // if (!_channelFormKey.currentState!.validate()) {
-  //   //   return;
-  //   // }
-  //   // // Remove keyboard
-  //   // FocusScope.of(context).requestFocus(FocusNode());
-  //   // SharedPreferences prefs = await SharedPreferences.getInstance();
-  //   // prefs.setString("apiKey", _apiKey.text);
-  //   // prefs.setString("cluster", _cluster.text);
-  //   // prefs.setString("channelName", _channelName.text);
+  Future<void> initPusher() async {
+    // if (!_channelFormKey.currentState!.validate()) {
+    //   return;
+    // }
+    // // Remove keyboard
+    // FocusScope.of(context).requestFocus(FocusNode());
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    // prefs.setString("apiKey", _apiKey.text);
+    // prefs.setString("cluster", _cluster.text);
+    // prefs.setString("channelName", _channelName.text);
 
-  //   try {
-  //     await pusher.init(
-  //       apiKey: "73968744b27e375ef439",
-  //       cluster: "mt1",
-  //       onConnectionStateChange: onConnectionStateChange,
-  //       onError: onError,
-  //       onSubscriptionSucceeded: onSubscriptionSucceeded,
-  //       onEvent: onEvent,
-  //       onSubscriptionError: onSubscriptionError,
-  //       onDecryptionFailure: onDecryptionFailure,
-  //       onMemberAdded: onMemberAdded,
-  //       onMemberRemoved: onMemberRemoved,
-  //       onSubscriptionCount: onConnectionStateChange,
-  //       // authEndpoint: "<Your Authendpoint Url>",
-  //       // onAuthorizer: onAuthorizer
-  //     );
-  //     await pusher.subscribe(
-  //         channelName: 'cache-${widget.purchaseDetails.reference}');
-  //     await pusher.connect();
-  //   } catch (e) {
-  //     log("ERROR: $e");
-  //   }
-  //   // PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
-  //   // try {
-  //   //   await pusher.init(
-  //   //     apiKey: "73968744b27e375ef439",
-  //   //     cluster: "mt1",
-  //   //     onConnectionStateChange: onConnectionStateChange,
-  //   //     onError: onError,
-  //   //     onSubscriptionSucceeded: onSubscriptionSucceeded,
-  //   //     onEvent: onEvent,
-  //   //     onSubscriptionError: onSubscriptionError,
-  //   //     onDecryptionFailure: onDecryptionFailure,
-  //   //     onMemberAdded: onMemberAdded,
-  //   //     onMemberRemoved: onMemberRemoved,
+    try {
+      await pusher.init(
+        apiKey: "e1c1f089656c77fe14b2",
+        cluster: "us2",
+        onConnectionStateChange: onConnectionStateChange,
+        onError: onError,
+        onSubscriptionSucceeded: onSubscriptionSucceeded,
+        onEvent: onEvent,
+        onSubscriptionError: onSubscriptionError,
+        onDecryptionFailure: onDecryptionFailure,
+        onMemberAdded: onMemberAdded,
+        onMemberRemoved: onMemberRemoved,
+        onSubscriptionCount: onConnectionStateChange,
+        // authEndpoint: "<Your Authendpoint Url>",
+        // onAuthorizer: onAuthorizer
+      );
+      await pusher.subscribe(
+          channelName: 'cache-${widget.purchaseDetails.reference}');
+      await pusher.connect();
+    } catch (e) {
+      log("ERROR: $e");
+    }
+    // PusherChannelsFlutter pusher = PusherChannelsFlutter.getInstance();
+    // try {
+    //   await pusher.init(
+    //     apiKey: "73968744b27e375ef439",
+    //     cluster: "mt1",
+    //     onConnectionStateChange: onConnectionStateChange,
+    //     onError: onError,
+    //     onSubscriptionSucceeded: onSubscriptionSucceeded,
+    //     onEvent: onEvent,
+    //     onSubscriptionError: onSubscriptionError,
+    //     onDecryptionFailure: onDecryptionFailure,
+    //     onMemberAdded: onMemberAdded,
+    //     onMemberRemoved: onMemberRemoved,
 
-  //   //     // authEndpoint: "<Your Authendpoint>",
-  //   //     // onAuthorizer: onAuthorizer
-  //   //   );
-  //   //   await pusher.subscribe(
-  //   //     channelName: 'cache-${widget.purchaseDetails.reference}',
-  //   //     // onConnectionStateChange: onConnectionStateChange,
-  //   //     // onError: onError,
-  //   //     // onSubscriptionSucceeded: onSubscriptionSucceeded,
-  //   //     // onEvent: onEvent,
-  //   //     // onSubscriptionError: onSubscriptionError,
-  //   //     // onDecryptionFailure: onDecryptionFailure,
-  //   //     // onMemberAdded: onMemberAdded,
-  //   //     // onMemberRemoved: onMemberRemoved,
-  //   //   );
+    //     // authEndpoint: "<Your Authendpoint>",
+    //     // onAuthorizer: onAuthorizer
+    //   );
+    //   await pusher.subscribe(
+    //     channelName: 'cache-${widget.purchaseDetails.reference}',
+    //     // onConnectionStateChange: onConnectionStateChange,
+    //     // onError: onError,
+    //     // onSubscriptionSucceeded: onSubscriptionSucceeded,
+    //     // onEvent: onEvent,
+    //     // onSubscriptionError: onSubscriptionError,
+    //     // onDecryptionFailure: onDecryptionFailure,
+    //     // onMemberAdded: onMemberAdded,
+    //     // onMemberRemoved: onMemberRemoved,
+    //   );
 
-  //   //   await pusher.connect();
-  //   //   // myChannel.
-  //   // } catch (e) {
-  //   //   print("ERROR: $e");
-  //   // }
-  // }
+    //   await pusher.connect();
+    //   // myChannel.
+    // } catch (e) {
+    //   print("ERROR: $e");
+    // }
+  }
 
   @override
   Widget build(BuildContext context) {

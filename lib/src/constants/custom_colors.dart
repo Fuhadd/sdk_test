@@ -57,4 +57,7 @@ class CustomColors {
 
   static Color lightPrimaryBrandColor() =>
       primaryBrandColor().withOpacity(0.07);
+
+  static Color lighterPrimaryBrandColor() =>
+      primaryBrandColor().withOpacity(0.05);
 }
